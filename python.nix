@@ -11,7 +11,6 @@ in
     numpy
     pandas
     scikit-learn
-    tensorflow
     torch
     transformers
 
