@@ -1,7 +1,7 @@
 { pkgs }:
 
 let
-  python = pkgs.python3_13;
+  python = pkgs.python313;
 in
 [
   (python.withPackages (ps: with ps; [
