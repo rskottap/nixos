@@ -19,7 +19,6 @@
   lsof
   mlocate
   plocate
-  strace
   tree
   figlet
   cowsay
@@ -83,4 +82,7 @@
   git
   github-cli
   jq
+  strace
+  ltrace
+  binutils #strings
 ]
