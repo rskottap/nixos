@@ -2,15 +2,24 @@
 
 let
   commonPackages = ps: with ps; [
+    # basics
+    ipython
     requests
     beautifulsoup4
+    yt-dlp
+    build
+    twine
+    pytest
+    editdistance
+    multiprocess
+
+    # numerical
     numpy
+    scipy
     pandas
-    scikit-learn
-    transformers
-    ipython
     matplotlib
     seaborn
+    scikit-learn
 
     # GPU-enabled PyTorch
     (pytorch.override { cudaSupport = true; })
