@@ -9,11 +9,7 @@ let
   # sudo ln -sv /home/ramya/Desktop/repos/nix-packages /etc/nixos/nix-packages
 
   packagesPath = ./nix-packages;
-  basePackages   = import (packagesPath + "/base.nix")   { inherit pkgs; };
-  appPackages    = import (packagesPath + "/apps.nix")   { inherit pkgs; };
-  fontPackages   = import (packagesPath + "/fonts.nix")  { inherit pkgs; };
-  pythonPackages = import (packagesPath + "/python.nix") { inherit pkgs; };
-  #workPackages   = import (packagesPath + "/work.nix")   { inherit pkgs; };
+  basePackages = import (packagesPath + "/base") { inherit pkgs; };
 
 in
 
@@ -120,11 +116,11 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = basePackages ++ appPackages ++ pythonPackages; # ++ workPackages;
+  environment.systemPackages = basePackages.all;
 
   fonts = {
     fontDir.enable = true;
-    packages = fontPackages;
+    packages = basePackages.fonts;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

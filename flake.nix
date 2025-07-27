@@ -1,5 +1,5 @@
 {
-  description = "Shared system-wide packages for Nix";
+  description = "Shared system-wide packages with overlays for Nix";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -10,17 +10,32 @@
       packages = forAllSystems (system:
         let
           pkgs = import nixpkgs {
-            system = "x86_64-linux";
+            inherit system;
             config.allowUnfree = true;
           };
-          base   = import ./base.nix   { inherit pkgs; };
-          apps   = import ./apps.nix   { inherit pkgs; };
-          fonts  = import ./fonts.nix  { inherit pkgs; };
-          python = import ./python.nix { inherit pkgs; };
+          basePackages = import ./base { inherit pkgs; };
         in {
           default = pkgs.buildEnv {
-            name = "full-system-packages";
-            paths = base ++ apps ++ fonts ++ python;
+            name = "base-system-packages";
+            paths = basePackages.all;
+          };
+          
+          # Individual package sets for flexibility
+          base = pkgs.buildEnv {
+            name = "base-packages";
+            paths = basePackages.base;
+          };
+          apps = pkgs.buildEnv {
+            name = "app-packages";
+            paths = basePackages.apps;
+          };
+          fonts = pkgs.buildEnv {
+            name = "font-packages";
+            paths = basePackages.fonts;
+          };
+          python = pkgs.buildEnv {
+            name = "python-packages";
+            paths = basePackages.python;
           };
         }
       );
