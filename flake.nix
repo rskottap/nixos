@@ -9,7 +9,10 @@
     in {
       packages = forAllSystems (system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
           base   = import ./base.nix   { inherit pkgs; };
           apps   = import ./apps.nix   { inherit pkgs; };
           fonts  = import ./fonts.nix  { inherit pkgs; };
