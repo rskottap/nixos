@@ -20,13 +20,13 @@
   mlocate
   plocate
   tree
+  sl
   figlet
   cowsay
   xcowsay
   toilet
   asciiquarium
   cmatrix
-  fbida
   dos2unix
   xclip
   xdotool
