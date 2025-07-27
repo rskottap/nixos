@@ -1,38 +1,30 @@
 { pkgs }:
 
 let
-  python313 = pkgs.python313;
-  python311 = pkgs.python311;
+  commonPackages = ps: with ps; [
+    requests
+    beautifulsoup4
+    numpy
+    pandas
+    scikit-learn
+    transformers
+    ipython
+    matplotlib
+    seaborn
 
+    # GPU-enabled PyTorch
+    (pytorch.override { cudaSupport = true; })
+
+  ];
+
+  python311 = pkgs.python311.withPackages (ps: commonPackages ps ++ [ ps.tensorflow-bin ]);
+  python313 = pkgs.python313.withPackages commonPackages;
 in
 [
-  (python313.withPackages (ps: with ps; [
-    requests
-    beautifulsoup4
+  python311
+  python313
 
-    numpy
-    pandas
-    scikit-learn
-    torch
-    transformers
-
-    ipython
-    matplotlib
-    seaborn
-  ]))
-
-  (python311.withPackages (ps: with ps; [
-    requests
-    beautifulsoup4
-
-    numpy
-    pandas
-    scikit-learn
-    torch
-    transformers
-
-    ipython
-    matplotlib
-    seaborn
-  ]))
+  # Optional: CUDA runtime libraries (non-Python)
+  pkgs.cudaPackages.cudatoolkit
+  pkgs.cudaPackages.cudnn
 ]
