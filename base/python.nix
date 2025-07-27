@@ -26,7 +26,12 @@ let
 
   ];
 
-  python311 = pkgs.python311.withPackages (ps: commonPackages ps ++ [ ps.tensorflow-bin ]);
+  workPackages311 = ps: with ps; [
+    lambda-multiprocessing
+    tflite-runtime
+  ];
+
+  python311 = pkgs.python311.withPackages commonPackages ++ workPackages311;
   python313 = pkgs.python313.withPackages commonPackages;
 in
 [

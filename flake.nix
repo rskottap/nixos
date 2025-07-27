@@ -12,29 +12,12 @@
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
+            overlays = [ (import ./overlay/python) ];
           };
           basePackages = import ./base { inherit pkgs; };
         in {
           default = pkgs.buildEnv {
             name = "base-system-packages";
-            paths = basePackages.all;
-          };
-          
-          # Individual package sets for flexibility
-          base = pkgs.buildEnv {
-            name = "base-packages";
-            paths = basePackages.base;
-          };
-          apps = pkgs.buildEnv {
-            name = "app-packages";
-            paths = basePackages.apps;
-          };
-          fonts = pkgs.buildEnv {
-            name = "font-packages";
-            paths = basePackages.fonts;
-          };
-          python = pkgs.buildEnv {
-            name = "python-packages";
             paths = basePackages.python;
           };
         }
