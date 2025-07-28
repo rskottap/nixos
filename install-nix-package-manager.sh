@@ -52,4 +52,4 @@ if [ "$phase" == "home-manager" ]; then
     nix-channel --update
     # Install home manager
     nix-shell '<home-manager>' -A install
-
+fi
