@@ -1,6 +1,16 @@
-# Nix Packages
+# Nixos
+
+Symlink `./configuration.nix` to `/etc/nixos/configuration.nix`
+
+```bash
+ln -sv ./configuration.nix /etc/nixos/
+```
+
+## Nix Packages
 
 All my core common packages (devtools, apps, python, fonts etc.,) in one place so I can install them using nix on any OS. See `flake.nix` for included OSes.
+
+Same packages included in configuration.nix for NixOS.
 
 In `/etc/nix/nix.conf` add:
 ```
@@ -17,13 +27,31 @@ For a temp dev shell:
 nix develop .
 ```
 
-Completely uninstall everything nix:
+### Completely Uninstall Nix
 ```bash
 nix profile wipe-history
 nix store gc # garbage collect
 rm -rf ~/.nix-profile ~/.nix-defexpr ~/.cache/nix ~/.local/state/nix ~/.nix* ~/.config/nixpkgs
-sudo rm -rf /nix/
+sudo rm -rf /nix /etc/nix
 sudo rm -f /etc/profile.d/nix.sh
 sudo rm -f /etc/bashrc.d/nix.sh
 sudo rm -f /etc/zshrc.nix
+sudo rm -rf /etc/tmpfiles.d/nix-daemon.conf
+
+# Linux with systemd
+sudo systemctl stop nix-daemon.service
+sudo systemctl disable nix-daemon.socket nix-daemon.service
+sudo systemctl daemon-reload
+
+# Remove Nix build users and their group
+for i in $(seq 1 32); do sudo userdel nixbld$i; done
+sudo groupdel nixbld
+
+# MacOS
+# Edit fstab to remove the Nix Store volume mount:
+# Use sudo vifs to edit /etc/fstab and remove the line mounting /nix.
+# Edit /etc/synthetic.conf:
+# Remove the nix line from /etc/synthetic.conf or if it's the only line, you can delete the file.
+
+# reboot
 ```
