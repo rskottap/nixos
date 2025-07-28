@@ -1,5 +1,14 @@
 # Nixos
 
+Always optimize your setup and workflows to make it super easy to get started, improve and iterate. 
+
+
+OBEY ME.
+🕶️✌️
+
+---
+## NixOS
+
 Symlink `./configuration.nix` to `/etc/nixos/configuration.nix`
 
 ```bash
