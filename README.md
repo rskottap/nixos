@@ -17,14 +17,6 @@ sudo reboot
 ./install-nix-package-manager.sh home-manager
 ```
 
-## Setup dotfiles, configs, shortcuts, preferences etc., via Home Manager
-
-See home.nix
-```bash
-# On any Linux with nix + home-manager installed
-home-manager switch --flake ~/Desktop/repos/nixos#ramya
-```
-
 ## Nix Packages
 
 All my core common packages (devtools, apps, python, fonts etc.,) in one place so I can install them using nix on any OS. See `flake.nix` for included OSes.
