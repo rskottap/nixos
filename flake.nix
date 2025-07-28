@@ -12,7 +12,7 @@
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
-            overlays = [ (import ./overlay/python) ];
+            overlays = import ./overlay;
           };
           basePackages = import ./base { inherit pkgs; };
         in {

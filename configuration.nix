@@ -5,11 +5,9 @@
 { config, pkgs, ... }:
 
 let
-  # ./nix-packages is a symlink to my nix-packages repo
-  # sudo ln -sv /home/ramya/Desktop/repos/nix-packages /etc/nixos/nix-packages
+  # sudo ln -sv /home/ramya/Desktop/repos/nix-packages/configuration.nix /etc/nixos/configuration.nix
 
-  packagesPath = ./nix-packages;
-  basePackages = import (packagesPath + "/base") { inherit pkgs; };
+  basePackages = import "./base" { inherit pkgs; };
 
 in
 
@@ -110,6 +108,9 @@ in
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  # Import custom overlays
+  nixpkgs.overlays = import ./overlay;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
