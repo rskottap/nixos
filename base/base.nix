@@ -20,6 +20,7 @@
   mlocate
   plocate
   tree
+  neofetch
   sl
   figlet
   cowsay
@@ -44,18 +45,12 @@
   libreoffice
   vlc
   scrot
-  gnome-screenshot
   ffmpegthumbnailer
   gedit
   meld
-  lightdm-gtk-greeter
-  lightdm-slick-greeter
   pavucontrol
   gnome-disk-utility
   sshfs
-  
-  ### Make it pretty
-  neofetch
 
   ### Videos and Editing
   yt-dlp
