@@ -7,12 +7,22 @@ OBEY ME.
 🕶️✌️
 
 ---
-## NixOS
+## Install Nix and Home Manager
 
-Symlink `./configuration.nix` to `/etc/nixos/configuration.nix`
-
+Uses the official nix installer:
 ```bash
-ln -sv ./configuration.nix /etc/nixos/
+./install-nix-package-manager.sh install
+sudo reboot
+./install-nix-package-manager.sh channel
+./install-nix-package-manager.sh home-manager
+```
+
+## Setup dotfiles, configs, shortcuts, preferences etc., via Home Manager
+
+See home.nix
+```bash
+# On any Linux with nix + home-manager installed
+home-manager switch --flake ~/Desktop/repos/nixos#ramya
 ```
 
 ## Nix Packages
@@ -36,7 +46,7 @@ For a temp dev shell:
 nix develop .
 ```
 
-### Completely Uninstall Nix
+## Completely Uninstall Nix
 ```bash
 nix profile wipe-history
 nix store gc # garbage collect
