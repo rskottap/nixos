@@ -7,11 +7,6 @@ In `/etc/nix/nix.conf` add:
 experimental-features = nix-command flakes
 ```
 
-In `~/.config/nixpkgs/config.nix` add:
-{
-  allowUnfree = true;
-}
-
 After installing nix on the system, run:
 ```bash
 nix profile add .
@@ -26,5 +21,9 @@ Completely uninstall everything nix:
 ```bash
 nix profile wipe-history
 nix store gc # garbage collect
-rm -rf ~/.nix-profile ~/.nix-defexpr ~/.cache/nix ~/.local/state/nix
+rm -rf ~/.nix-profile ~/.nix-defexpr ~/.cache/nix ~/.local/state/nix ~/.nix* ~/.config/nixpkgs
+sudo rm -rf /nix/
+sudo rm -f /etc/profile.d/nix.sh
+sudo rm -f /etc/bashrc.d/nix.sh
+sudo rm -f /etc/zshrc.nix
 ```
