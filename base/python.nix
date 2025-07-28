@@ -31,8 +31,8 @@ let
     tflite-runtime
   ];
 
-  python311 = pkgs.python311.withPackages commonPackages ++ workPackages311;
-  python313 = pkgs.python313.withPackages commonPackages;
+  python311 = pkgs.python311.withPackages (ps: commonPackages ps ++ workPackages311 ps);
+  python313 = pkgs.python313.withPackages (ps: commonPackages ps);
 in
 [
   python311
