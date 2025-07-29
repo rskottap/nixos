@@ -18,7 +18,7 @@
         in {
           default = pkgs.buildEnv {
             name = "base-system-packages";
-            paths = basePackages.python;
+            paths = basePackages.all;
           };
         }
       );
