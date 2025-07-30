@@ -21,7 +21,7 @@ ln -svf $PWD /etc/nixos
 
 Inside /etc/nixos run:
 ```bash
-nixos-rebuild switch
+sudo nixos-rebuild switch
 ```
 
 ## Nix Packages
