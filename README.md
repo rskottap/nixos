@@ -21,6 +21,10 @@ sudo reboot
 
 On NixOS simply symlink /etc/nixos to your repo:
 ```bash
+mkdir -pv ~/Desktop/repos
+cd ~/Desktop/repos
+git clone https://github.com/rskottap/nixos.git
+cd nixos
 sudo rm -rf /etc/nixos
 ln -svf $PWD /etc/nixos
 ```
