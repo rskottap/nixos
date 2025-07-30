@@ -9,22 +9,30 @@
     };
 
     # Directly pull from my home-manager config repo
-    ramya-home.url = "github:rskottap/home-manager";
-    ramya-home.inputs.nixpkgs.follows = "nixpkgs";
+    ramya-home = {
+      url = "github:rskottap/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ramya-home, ... }: 
     let
-      forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
+      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      overlay = import ./overlay;
+
+      mkPkgs = system: import nixpkgs {
+        inherit system;
+        overlays = overlay;
+        config.allowUnfree = true;
+      };
+
     in {
       # ✅ For non-NixOS use: `nix profile add .` or `nix build .#default`
       packages = forAllSystems (system:
         let
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = import ./overlay;
-          };
+          pkgs = mkPkgs system;
           basePackages = import ./base { inherit pkgs; };
         in {
           default = pkgs.buildEnv {
@@ -42,13 +50,7 @@
             ./configuration.nix
             home-manager.nixosModules.home-manager
             {
-              nixpkgs = {
-                overlays = import ./overlay;
-                config.allowUnfree = true;
-              };
-
               home-manager = {
-                useGlobalPkgs = true;
                 useUserPackages = true;
                 users.ramya = import ramya-home.homeModules;
               };
