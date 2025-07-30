@@ -7,16 +7,6 @@ OBEY ME.
 🕶️✌️
 
 ---
-## Install Nix and Home Manager
-
-Uses the official nix installer:
-```bash
-./install-nix-package-manager.sh install
-sudo reboot
-./install-nix-package-manager.sh channel
-./install-nix-package-manager.sh home-manager
-```
-
 ## NixOS
 
 On NixOS simply symlink /etc/nixos to your repo:
@@ -45,7 +35,7 @@ In `/etc/nix/nix.conf` add:
 experimental-features = nix-command flakes
 ```
 
-After installing nix on the system, run:
+After installing nix on any non-NixOS system, run:
 ```bash
 nix profile add .
 ```
