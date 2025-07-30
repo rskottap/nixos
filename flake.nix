@@ -1,7 +1,17 @@
 {
   description = "Shared system-wide packages with overlays for Nix";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Directly pull from my home-manager config repo
+    ramya-home.url = "https://github.com/rskottap/home-manager.git";
+    ramya-home.inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = { self, nixpkgs }: 
     let
@@ -24,15 +34,24 @@
         }
       );
 
-      # ✅ For NixOS use: `nixos-rebuild switch --flake .#hostname`
+      # ✅ For NixOS use: `sudo nixos-rebuild switch`
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./configuration.nix
+            home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = import ./overlay;
-              nixpkgs.config.allowUnfree = true;
+              nixpkgs = {
+                overlays = import ./overlay;
+                config.allowUnfree = true;
+              };
+
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.ramya = import ramya-home + "/home.nix";
+              };
             }
           ];
         };
