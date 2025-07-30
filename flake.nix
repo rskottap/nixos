@@ -9,11 +9,11 @@
     };
 
     # Directly pull from my home-manager config repo
-    ramya-home.url = "https://github.com/rskottap/home-manager.git";
+    ramya-home.url = "github:rskottap/home-manager";
     ramya-home.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs }: 
+  outputs = { self, nixpkgs, home-manager, ramya-home, ... }: 
     let
       forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
     in {
@@ -50,7 +50,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.ramya = import ramya-home + "/home.nix";
+                users.ramya = import ramya-home.homeModules;
               };
             }
           ];
