@@ -5,9 +5,9 @@
 { config, pkgs, ... }:
 
 let
-  # sudo ln -sv /home/ramya/Desktop/repos/nix-packages/configuration.nix /etc/nixos/configuration.nix
 
-  basePackages = import "./base" { inherit pkgs; };
+  #basePackages = import "./base" { inherit pkgs; };
+  basePackages = import (toString ./base) { inherit pkgs; };
 
 in
 
@@ -110,7 +110,7 @@ in
   programs.firefox.enable = true;
 
   # Import custom overlays
-  nixpkgs.overlays = import ./overlay;
+  nixpkgs.overlays = import (toString ./overlay);
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
