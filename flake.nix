@@ -52,7 +52,8 @@
             {
               home-manager = {
                 useUserPackages = true;
-                users.ramya = import ramya-home.homeModules;
+                backupFileExtension = "backup";
+                users.ramya = ramya-home.nixosModules.default;
               };
             }
           ];
