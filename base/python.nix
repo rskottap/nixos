@@ -21,8 +21,9 @@ let
     seaborn
     scikit-learn
 
+    pytorch
     # GPU-enabled PyTorch
-    (pytorch.override { cudaSupport = true; })
+    #(pytorch.override { cudaSupport = true; })
 
   ];
 
@@ -39,6 +40,6 @@ in
   python313
 
   # Optional: CUDA runtime libraries (non-Python)
-  pkgs.cudaPackages.cudatoolkit
-  pkgs.cudaPackages.cudnn
+  #pkgs.cudaPackages.cudatoolkit
+  #pkgs.cudaPackages.cudnn
 ]
