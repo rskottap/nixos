@@ -24,6 +24,11 @@ Inside /etc/nixos run:
 sudo nixos-rebuild switch
 ```
 
+If you modified home-manager repo:
+```bash
+nix flake lock --update-input ramya-home
+```
+
 ## Nix Packages
 
 All my core common packages (devtools, apps, python, fonts etc.,) in one place so I can install them using nix on any OS. See `flake.nix` for included OSes.
