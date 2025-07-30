@@ -17,6 +17,19 @@ sudo reboot
 ./install-nix-package-manager.sh home-manager
 ```
 
+## NixOS
+
+On NixOS simply symlink /etc/nixos to your repo:
+```bash
+sudo rm -rf /etc/nixos
+ln -svf $PWD /etc/nixos
+```
+
+Inside /etc/nixos run:
+```bash
+nixos-rebuild switch
+```
+
 ## Nix Packages
 
 All my core common packages (devtools, apps, python, fonts etc.,) in one place so I can install them using nix on any OS. See `flake.nix` for included OSes.
