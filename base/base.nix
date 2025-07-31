@@ -51,6 +51,7 @@
   pavucontrol
   gnome-disk-utility
   sshfs
+  gnumake
 
   ### Videos and Editing
   yt-dlp
