@@ -12,4 +12,18 @@
     ];
   };
 
+  # groups
+  users.extraGroups.plocate.members = [ "ramya" ];
+
+  security.sudo = {
+    enable = true;
+    extraRules = [
+      {
+        users = [ "ramya" ];
+        commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
+  };
+
 }
