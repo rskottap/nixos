@@ -28,6 +28,41 @@
         config.allowUnfree = true;
       };
 
+      # Helper function to create NixOS configurations for machines
+      mkMachine = { name, system ? "x86_64-linux", users ? ["ramya"] }: 
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./machines/${name}/default.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                # Configure home-manager for each user
+                users = nixpkgs.lib.genAttrs users (user: 
+                  if user == "ramya" then ramya-home.nixosModules.default
+                  else throw "Home configuration for user '${user}' not defined"
+                );
+              };
+            }
+          ];
+        };
+
+      # Define all machines here
+      machines = {
+        church = {
+          name = "church";
+          system = "x86_64-linux";
+          users = ["ramya"];
+        };
+        curry = {
+          name = "curry";
+          system = "x86_64-linux";
+          users = ["ramya"];
+        };
+      };
+
     in {
       # ✅ For non-NixOS use: `nix profile add .` or `nix build .#default`
       packages = forAllSystems (system:
@@ -42,23 +77,19 @@
         }
       );
 
-      # ✅ For NixOS use: `sudo nixos-rebuild switch`
-      nixosConfigurations = {
-        church = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                users.ramya = ramya-home.nixosModules.default;
-              };
-            }
-          ];
-        };
-      };
+      # ✅ For NixOS use: `sudo nixos-rebuild switch --flake .#<machine-name>`
+      nixosConfigurations = nixpkgs.lib.mapAttrs (name: config: mkMachine config) machines;
 
+      # Helper to list available machines
+      apps = forAllSystems (system: {
+        list-machines = {
+          type = "app";
+          program = toString (nixpkgs.legacyPackages.${system}.writeScript "list-machines" ''
+            #!/bin/sh
+            echo "Available NixOS configurations:"
+            ${nixpkgs.lib.concatStringsSep "\n" (nixpkgs.lib.mapAttrsToList (name: config: "echo '  ${name} (${config.system})'") machines)}
+          '');
+        };
+      });
     };
 }
