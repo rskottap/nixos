@@ -28,7 +28,7 @@ in
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "church"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -37,6 +37,7 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  programs.openvpn3.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

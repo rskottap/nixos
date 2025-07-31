@@ -44,7 +44,7 @@
 
       # ✅ For NixOS use: `sudo nixos-rebuild switch`
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        church = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./configuration.nix
