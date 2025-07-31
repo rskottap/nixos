@@ -1,8 +1,14 @@
 system:
-	sudo nixos-rebuild switch --flake .#
+	sudo nixos-rebuild switch --flake .#$(hostname)
 
-update-home:
-	nix flake lock --update-input ramya-home
+update:
+	nix flake update
 
 install:
 	nix profile add .
+
+check:
+	nix flake check
+
+list:
+	nix run .#list-machines

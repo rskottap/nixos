@@ -13,7 +13,6 @@ This repository provides a modular NixOS configuration that supports:
 - Multiple machines with different hardware configurations
 - Machine-specific settings (hostname, timezone, packages, etc.)
 - Shared modules for common functionality
-- Multiple users with their own configurations
 - Easy addition of new machines
 
 ```
@@ -26,18 +25,13 @@ nixos/
 │   ├── church/                  # Desktop machine
 │   │   ├── default.nix         # Machine config
 │   │   └── hardware.nix        # Hardware config
-│   └── work-laptop/            # Work laptop
+│   └── curry/                   # Another machine
 │       ├── default.nix         # Machine config
 │       └── hardware.nix        # Hardware config
-├── modules/                     # Shared NixOS modules
-│   ├── common.nix              # Common system configuration
-│   ├── desktop.nix             # Desktop environment
-│   └── users.nix               # User management
-├── users/                      # User-specific configurations
-│   └── ramya/                  # User config
-│       └── default.nix
-└── scripts/                    # Helper scripts
-    └── add-machine.sh          # Script to add new machines
+└── modules/                     # Shared NixOS modules
+    ├── common.nix              # Common system configuration
+    ├── desktop.nix             # Desktop environment
+    └── users.nix               # User management
 ```
 
 ---
@@ -56,48 +50,11 @@ sudo rm -rf /etc/nixos
 ln -svf $PWD /etc/nixos
 ```
 
-### Using the New Modular Structure
-
-For specific machines, use the flake-based approach:
-```bash
-# For the church machine (desktop)
-sudo nixos-rebuild switch --flake .#church
-
-# For the work laptop
-sudo nixos-rebuild switch --flake .#work-laptop
-
-# List available machines
-nix run .#list-machines
-```
-
-### Legacy Compatibility
-
-The old method still works for backward compatibility (uses church config):
-```bash
-sudo nixos-rebuild switch
-```
-
-### Updating Home Manager
-
-If you modified the home-manager repo:
-```bash
-nix flake lock --update-input ramya-home
-```
-
 ---
 
 ## Adding New Machines
 
-### Method 1: Using the Helper Script
-
-```bash
-# Add a new machine
-./scripts/add-machine.sh my-new-laptop x86_64-linux
-
-# Follow the instructions printed by the script
-```
-
-### Method 2: Manual Setup
+### Manual Setup
 
 1. **Create machine directory:**
    ```bash
@@ -131,7 +88,6 @@ nix flake lock --update-input ramya-home
      my-new-machine = {
        name = "my-new-machine";
        system = "x86_64-linux";
-       users = ["ramya"];
      };
    };
    ```
@@ -157,9 +113,10 @@ Each machine can have its own settings in `machines/<name>/default.nix`:
   # Work-specific timezone
   time.timeZone = "America/New_York";
   
-  # Work-specific packages
-  environment.systemPackages = with pkgs; [
-    teams
+  # Work-specific packages (ADDS to base packages, doesn't replace them)
+  machine.additionalPackages = with pkgs; [
+    teams-for-linux  # Use teams-for-linux on Linux, teams on macOS
+    thunderbird      # Email client
     slack
     # other work tools
   ];
@@ -172,44 +129,6 @@ Each machine can have its own settings in `machines/<name>/default.nix`:
   };
 }
 ```
-
----
-
-## User Management
-
-### Adding New Users
-
-1. **Add user to `modules/users.nix`:**
-   ```nix
-   users.users.newuser = {
-     isNormalUser = true;
-     description = "New User";
-     extraGroups = [ "networkmanager" "wheel" ];
-   };
-   ```
-
-2. **Create user directory:**
-   ```bash
-   mkdir -p users/newuser
-   ```
-
-3. **Create `users/newuser/default.nix`:**
-   ```nix
-   { config, pkgs, ... }:
-   {
-     # User-specific configurations
-   }
-   ```
-
-4. **Update machine configurations to include the new user:**
-   ```nix
-   # In flake.nix machines definition
-   my-machine = {
-     name = "my-machine";
-     system = "x86_64-linux";
-     users = ["ramya" "newuser"];
-   };
-   ```
 
 ---
 
@@ -232,27 +151,6 @@ nix profile add .
 
 # Temporary development shell
 nix develop .
-```
-
----
-
-## Available Commands
-
-```bash
-# List available machine configurations
-nix run .#list-machines
-
-# Add a new machine
-./scripts/add-machine.sh <machine-name> [system-type]
-
-# Build specific machine configuration
-sudo nixos-rebuild switch --flake .#<machine-name>
-
-# Update flake inputs
-nix flake update
-
-# Check flake
-nix flake check
 ```
 
 ---

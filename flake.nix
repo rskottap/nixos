@@ -29,7 +29,7 @@
       };
 
       # Helper function to create NixOS configurations for machines
-      mkMachine = { name, system ? "x86_64-linux", users ? ["ramya"] }: 
+      mkMachine = { name, system ? "x86_64-linux" }: 
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -39,11 +39,7 @@
               home-manager = {
                 useUserPackages = true;
                 backupFileExtension = "backup";
-                # Configure home-manager for each user
-                users = nixpkgs.lib.genAttrs users (user: 
-                  if user == "ramya" then ramya-home.nixosModules.default
-                  else throw "Home configuration for user '${user}' not defined"
-                );
+                users.ramya = ramya-home.nixosModules.default;
               };
             }
           ];
@@ -54,12 +50,10 @@
         church = {
           name = "church";
           system = "x86_64-linux";
-          users = ["ramya"];
         };
         curry = {
           name = "curry";
           system = "x86_64-linux";
-          users = ["ramya"];
         };
       };
 
