@@ -14,6 +14,7 @@
   # Work-specific packages
   machine.additionalPackages = with pkgs; [
     teams-for-linux
+    awscli2
     # other work tools
   ];
 }
