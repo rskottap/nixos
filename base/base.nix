@@ -81,6 +81,7 @@
   strace
   ltrace
   binutils #strings
+  gcc
 
   openvpn3
 ]
