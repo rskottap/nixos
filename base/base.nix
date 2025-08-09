@@ -84,4 +84,6 @@
   gcc
 
   openvpn3
+
+  meson
 ]
