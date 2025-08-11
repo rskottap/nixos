@@ -2,6 +2,7 @@
   obsidian
   google-chrome
   whatsapp-for-linux
+  wechat-uos
   vscode
   dropbox
 ]
