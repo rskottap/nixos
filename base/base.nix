@@ -1,26 +1,101 @@
 { pkgs }: with pkgs; [
-  vim
+  # System utilities
   acpi
+  hwinfo
+  usbutils
+  inotify-tools
+  lsof
+  htop
+  neofetch
+  tree
+  mlocate
+  plocate
+
+  # Text editors and viewers
+  vim
+  gedit
+  evince
+  eog
+
+  # Terminal and console
   gpm
-  nettools
-  alsa-utils
-  alsa-lib
-  wget
-  rsync
-  unzip
-  openssh
-  whois
+  bash-completion
+  coreutils
+
+  ## man pages
   man
   man-pages
+  linux-manual
+
+  # Network tools
+  nettools
+  wget
+  rsync
+  openssh
+  whois
   arp-scan
   nmap
   tor
   torsocks
-  lsof
-  mlocate
-  plocate
-  tree
-  neofetch
+  inetutils
+  networkmanager
+  openvpn3
+  sshfs
+
+  # Archive and file tools
+  unzip
+  dos2unix
+  xclip
+  xdotool
+  file
+
+  # Audio
+  alsa-utils
+  alsa-lib
+  pavucontrol
+
+  # Graphics and display
+  mesa
+  conky
+  xorg.libXrandr
+  scrot
+  ffmpegthumbnailer
+
+  # Image editing and viewing
+  gimp
+  imagemagick
+
+  # Office and productivity
+  libreoffice
+
+  # System configuration
+  dconf
+  dconf-editor
+
+  # Disk and filesystem
+  gparted
+  dosfstools
+  gnome-disk-utility
+
+  # Media and video
+  vlc
+  yt-dlp
+  simplescreenrecorder
+
+  # Dev tools
+  git
+  github-cli
+  gcc
+  gnumake
+  autoconf
+  automake
+  cmake
+  binutils # strings
+  jq
+  strace
+  ltrace
+
+  # Games
   sl
   figlet
   cowsay
@@ -28,62 +103,13 @@
   toilet
   asciiquarium
   cmatrix
-  dos2unix
-  xclip
-  xdotool
-  mesa
-  conky
-  hwinfo
-  inotify-tools
-  inetutils
-  dconf-editor
-  evince
-  eog
-  gimp
-  gparted
-  dosfstools
-  libreoffice
-  vlc
-  scrot
-  ffmpegthumbnailer
-  gedit
-  meld
-  pavucontrol
-  gnome-disk-utility
-  sshfs
-  gnumake
 
-  ### Videos and Editing
-  yt-dlp
-  simplescreenrecorder
-  
-  ### Ibus
+  # Diff and merge tools
+  meld
+
+  # Input methods (Ibus)
   ibus
   #ibus-anthy
   #ibus-hangul
   #ibus-libpinyin
-  
-  ### Other
-  htop
-  imagemagick
-  networkmanager
-  autoconf
-  automake
-  bash-completion
-  cmake
-  coreutils
-  dconf
-  usbutils
-  xorg.libXrandr
-  git
-  github-cli
-  jq
-  strace
-  ltrace
-  binutils #strings
-  gcc
-
-  openvpn3
-
-  meson
 ]
