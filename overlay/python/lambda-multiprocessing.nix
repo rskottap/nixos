@@ -1,10 +1,7 @@
 {
-  lib
-, buildPythonPackage
-, fetchPypi
+  buildPythonPackage
 , pip
 , setuptools
-, python
 , ...
 } @ inputs:
 
