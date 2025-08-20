@@ -8,7 +8,6 @@
   htop
   neofetch
   tree
-  mlocate
   plocate
 
   # Text editors and viewers
