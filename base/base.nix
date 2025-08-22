@@ -114,4 +114,6 @@
 
   # Nix
   nix-prefetch-github
+  nixpkgs-review
+
 ]
