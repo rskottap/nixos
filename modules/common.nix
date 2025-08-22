@@ -74,9 +74,6 @@ in
     # Install firefox.
     programs.firefox.enable = true;
 
-    # Import custom overlays
-    nixpkgs.overlays = import (toString ../overlay);
-
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 

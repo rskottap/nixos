@@ -13,18 +13,24 @@
       url = "github:rskottap/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # External Python packages overlay
+    python-packages = {
+      url = "github:doubleunix/python-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ramya-home, ... }: 
+  outputs = { self, nixpkgs, home-manager, ramya-home, python-packages, ... }:
     let
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      overlay = import ./overlay;
+      overlay = []; #import ./overlay;
 
       mkPkgs = system: import nixpkgs {
         inherit system;
-        overlays = overlay;
+        overlays = overlay ++ [ python-packages.overlays.default ];
         config.allowUnfree = true;
       };
 
@@ -36,6 +42,7 @@
             ./machines/${name}/default.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.overlays = overlay ++ [ python-packages.overlays.default ];
               home-manager = {
                 useUserPackages = true;
                 backupFileExtension = "backup";
