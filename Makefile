@@ -1,5 +1,5 @@
 system:
-	sudo nixos-rebuild switch --flake .#$(hostname)
+	sudo nixos-rebuild --print-build-logs switch --flake .#$(hostname)
 
 update:
 	nix flake update
