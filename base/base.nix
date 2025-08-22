@@ -111,4 +111,7 @@
   #ibus-anthy
   #ibus-hangul
   #ibus-libpinyin
+
+  # Nix
+  nix-prefetch-github
 ]
