@@ -33,7 +33,7 @@ let
   ];
 
   python311 = pkgs.python311.withPackages (ps: with ps; workPackages311 ps ++ [pip ipython]);
-  python313 = pkgs.python313.withPackages (ps: with ps; commonPackages ps ++ []);
+  python313 = pkgs.python313.withPackages (ps: with ps; commonPackages ps ++ [is-instance]);
 in
 [
   python311
