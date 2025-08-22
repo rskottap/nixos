@@ -30,7 +30,6 @@ let
 
   workPackages311 = ps: with ps; [
     lambda-multiprocessing
-    #tflite-runtime
   ];
 
   python311 = pkgs.python311.withPackages (ps: with ps; workPackages311 ps ++ [pip ipython]);
