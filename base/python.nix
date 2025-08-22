@@ -42,6 +42,7 @@ let
         python-cowsay
         dvc-s3
         webfs
+        imfind
       ]
     );
 in

@@ -1,6 +1,7 @@
 final: prev:
 let
   pythonOverlays = python-final: python-prev: {
+    imfind = python-final.callPackage ./imfind.nix {};
   };
 in
 {

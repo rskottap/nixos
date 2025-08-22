@@ -26,7 +26,7 @@
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      overlay = []; #import ./overlay;
+      overlay = import ./overlay;
 
       mkPkgs = system: import nixpkgs {
         inherit system;
