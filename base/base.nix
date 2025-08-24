@@ -115,5 +115,5 @@
   # Nix
   nix-prefetch-github
   nixpkgs-review
-
+  nixpkgs-lint
 ]
