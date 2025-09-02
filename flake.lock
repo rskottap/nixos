@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755810213,
-        "narHash": "sha256-QdenO8f0PTg+tC6HuSvngKcbRZA5oZKmjUT+MXKOLQg=",
+        "lastModified": 1756022458,
+        "narHash": "sha256-J1i35r4HfNDdPpwL0vOBaZopQudAUVtartEerc1Jryc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6911d3e7f475f7b3558b4f5a6aba90fa86099baa",
+        "rev": "9e3a33c0bcbc25619e540b9dfea372282f8a9740",
         "type": "github"
       },
       "original": {
@@ -57,26 +57,6 @@
         "type": "github"
       }
     },
-    "python-packages": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1755876203,
-        "narHash": "sha256-0GrbfIRK0lJ0gW9sj70CTYFVsNk0PriPO/ODK8alW50=",
-        "owner": "doubleunix",
-        "repo": "python-packages",
-        "rev": "785f50cb669e5d1d8cbe9f1f9b0c3c6f27b476d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "python-packages",
-        "type": "github"
-      }
-    },
     "ramya-home": {
       "inputs": {
         "home-manager": "home-manager_2",
@@ -102,8 +82,28 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "python-packages": "python-packages",
-        "ramya-home": "ramya-home"
+        "ramya-home": "ramya-home",
+        "wnix-packages": "wnix-packages"
+      }
+    },
+    "wnix-packages": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756074494,
+        "narHash": "sha256-7u3htrGW4p3GNIgG9aNpr7AbklmdbQJGzdFCPVsGfYU=",
+        "owner": "doubleunix",
+        "repo": "overlay",
+        "rev": "bb043ed63098a300a114178b16f9f64f44cc8aea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "overlay",
+        "type": "github"
       }
     }
   },

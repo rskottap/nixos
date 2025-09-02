@@ -37,18 +37,22 @@ let
   python313 = pkgs.python313.withPackages (ps: with ps; commonPackages ps ++ 
       [ 
         is-instance
-        embd
+        #embd
         python-bin
         python-cowsay
         dvc-s3
-        webfs
+        #webfs
         imfind
       ]
     );
+  python314 = pkgs.python314;
+  python315 = pkgs.python315; #.withPackages (ps: with ps; commonPackages ps);
 in
 [
   python311
   python313
+  python314
+  python315
 
   # Optional: CUDA runtime libraries (non-Python)
   #pkgs.cudaPackages.cudatoolkit
