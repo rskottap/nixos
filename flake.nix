@@ -15,13 +15,13 @@
     };
 
     # External Python packages overlay
-    python-packages = {
-      url = "github:doubleunix/python-packages";
+    wnix-packages = {
+      url = "github:doubleunix/overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ramya-home, python-packages, ... }:
+  outputs = { self, nixpkgs, home-manager, ramya-home, wnix-packages, ... }:
     let
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -30,7 +30,7 @@
 
       mkPkgs = system: import nixpkgs {
         inherit system;
-        overlays = overlay ++ [ python-packages.overlays.default ];
+        overlays = overlay ++ [ wnix-packages.overlays.default ];
         config.allowUnfree = true;
       };
 
@@ -42,7 +42,7 @@
             ./machines/${name}/default.nix
             home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = overlay ++ [ python-packages.overlays.default ];
+              nixpkgs.overlays = overlay ++ [ wnix-packages.overlays.default ];
               home-manager = {
                 useUserPackages = true;
                 backupFileExtension = "backup";
