@@ -16,7 +16,10 @@ in
 
   config = {
     # Enable unified Nix CLI
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      warn-dirty = false;
+    };
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
