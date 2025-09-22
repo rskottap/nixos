@@ -116,4 +116,11 @@
   nix-prefetch-github
   nixpkgs-review
   nixpkgs-lint
+
+  # n8n
+  nodejs
+
+  zoom-us
+
+  awscli2
 ]
