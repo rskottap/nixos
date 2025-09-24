@@ -28,20 +28,15 @@ let
     pip
   ];
 
-  workPackages311 = ps: with ps; [
-    lambda-multiprocessing
-    tflite-runtime
-  ];
-
-  python311 = pkgs.python311.withPackages (ps: with ps; workPackages311 ps ++ [pip ipython]);
+  #python311 = pkgs.python311.withPackages (ps: with ps; workPackages311 ps ++ [pip ipython]);
   python313 = pkgs.python313.withPackages (ps: with ps; commonPackages ps ++ 
       [ 
-        #is-instance
-        #embd
-        #python-bin
+        is-instance
+        embd
+        python-bin
         #python-cowsay
         dvc-s3
-        #webfs
+        webfs
         #imfind
       ]
     );

@@ -5,9 +5,7 @@ let
   };
 in
 {
-  python311 = prev.python311.override {
-    packageOverrides = pythonOverlays;
-  };
+  # Removed python311 from overlay to avoid tkinter issues
   python313 = prev.python313.override {
     packageOverrides = pythonOverlays;
   };
