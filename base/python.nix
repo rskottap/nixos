@@ -23,7 +23,7 @@ let
 
     pytorch
     # GPU-enabled PyTorch
-    #(pytorch.override { cudaSupport = true; })
+    (pytorch.override { cudaSupport = true; })
 
     pip
 
@@ -54,8 +54,4 @@ in
   python313
   python314
   python315
-
-  # Optional: CUDA runtime libraries (non-Python)
-  #pkgs.cudaPackages.cudatoolkit
-  #pkgs.cudaPackages.cudnn
 ]
