@@ -15,6 +15,9 @@
   machine.additionalPackages = with pkgs; [
     teams-for-linux
     awscli2
+    intune-portal
     # other work tools
   ];
+
+  services.intune.enable = true;
 }
