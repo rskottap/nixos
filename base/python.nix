@@ -26,6 +26,12 @@ let
     #(pytorch.override { cudaSupport = true; })
 
     pip
+
+    # notebooks
+    ipykernel
+    jupyter
+    notebook
+    pyzmq
   ];
 
   #python311 = pkgs.python311.withPackages (ps: with ps; workPackages311 ps ++ [pip ipython]);
