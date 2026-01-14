@@ -74,6 +74,14 @@ in
       #media-session.enable = true;
     };
 
+    # Bluetooth
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
+    services.blueman.enable = true;
+
     # Install firefox.
     programs.firefox.enable = true;
 
