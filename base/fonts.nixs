@@ -3,5 +3,6 @@
   terminus_font
   terminus_font_ttf
   noto-fonts
-  noto-fonts-color-emoji
+  noto-fonts-emoji
+  noto-fonts-extra
 ]

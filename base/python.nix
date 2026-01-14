@@ -21,7 +21,7 @@ let
     seaborn
     scikit-learn
 
-    pytorch
+    torch
     # GPU-enabled PyTorch
     #(pytorch.override { cudaSupport = true; })
 
