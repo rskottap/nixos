@@ -64,6 +64,8 @@
   gimp
   imagemagick
 
+  pdftotext
+
   # Office and productivity
   libreoffice
 
