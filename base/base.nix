@@ -64,7 +64,7 @@
   gimp
   imagemagick
 
-  pdftotext
+  poppler-utils
 
   # Office and productivity
   libreoffice
