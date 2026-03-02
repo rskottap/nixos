@@ -11,10 +11,10 @@
     xkb = {
       layout = "us";
       variant = "";
-      #options = "caps:escape";
+      options = "caps:escape_shifted_capslock";
     };
   };
 
   # make Caps=Esc also work on TTY/console
-  #console.useXkbConfig = true;
+  console.useXkbConfig = true;
 }
