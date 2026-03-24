@@ -6,7 +6,7 @@
   inotify-tools
   lsof
   htop
-  neofetch
+  fastfetch
   tree
   plocate
 
