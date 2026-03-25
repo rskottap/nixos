@@ -82,6 +82,16 @@ in
 
     services.blueman.enable = true;
 
+    # Enable Dropbox
+    systemd.user.services.dropbox = {
+      description = "Dropbox";
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.dropbox}/bin/dropbox";
+        Restart = "on-failure";
+      };
+    };
+ 
     # Install firefox.
     programs.firefox.enable = true;
 
