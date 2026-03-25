@@ -35,7 +35,7 @@ in
 
     # Enable networking
     networking.networkmanager.enable = true;
-    programs.openvpn3.enable = true;
+    #programs.openvpn.enable = true;
 
     # Set your time zone.
     time.timeZone = "America/Chicago";

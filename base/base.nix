@@ -38,7 +38,7 @@
   torsocks
   inetutils
   networkmanager
-  openvpn3
+  openvpn
   sshfs
 
   # Archive and file tools
