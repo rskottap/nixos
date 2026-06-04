@@ -125,4 +125,6 @@
   zoom-us
 
   awscli2
+
+  codex
 ]
