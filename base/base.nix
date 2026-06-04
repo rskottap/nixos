@@ -79,6 +79,7 @@
   gnome-disk-utility
 
   # Media and video
+  ffmpeg
   vlc
   yt-dlp
   simplescreenrecorder
