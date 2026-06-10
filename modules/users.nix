@@ -5,7 +5,7 @@
   users.users.ramya = {
     isNormalUser = true;
     description = "Ramya";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "lp" "scanner" "lpadmin" ];
     packages = with pkgs; [
     #  kdePackages.kate
     #  thunderbird
