@@ -101,7 +101,20 @@ in
         Restart = "on-failure";
       };
     };
- 
+
+    # Enable conky
+    systemd.user.services.conky = {
+      description = "Conky system monitor";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.conky}/bin/conky --config %h/.config/conky/conky.conf";
+        Restart = "on-failure";
+        RestartSec = 3;
+      };
+    };
+
     # Install firefox.
     programs.firefox.enable = true;
 
