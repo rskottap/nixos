@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772488673,
-        "narHash": "sha256-fEyHgJuw3qRzFWSRcZ+XR+TLNiYxcqGRhS67kEDZIXs=",
+        "lastModified": 1785084949,
+        "narHash": "sha256-dV+MAv+iHZfpanp6SySauvgWutF907syWhL9FSl42NA=",
         "owner": "rskottap",
         "repo": "home-manager",
-        "rev": "9d59357f034eab2079b40009d75fb214737cdeed",
+        "rev": "cdd34c3817e5c1b173a274d8db9cb3e81b09bf79",
         "type": "github"
       },
       "original": {
