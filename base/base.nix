@@ -56,7 +56,7 @@
   # Graphics and display
   mesa
   conky
-  xorg.libXrandr
+  libxrandr
   scrot
   ffmpegthumbnailer
 
