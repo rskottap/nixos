@@ -4,6 +4,9 @@ system:
 update:
 	nix flake update
 
+home:
+	nix flake update ramya-home
+
 install:
 	nix profile add .
 
