@@ -128,4 +128,6 @@
   awscli2
 
   codex
+
+  lualatex
 ]
