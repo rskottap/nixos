@@ -68,6 +68,7 @@
 
   # Office and productivity
   libreoffice
+  texlive.combined.scheme-medium
 
   # System configuration
   dconf
