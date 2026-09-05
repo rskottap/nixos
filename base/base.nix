@@ -68,6 +68,7 @@
 
   # Office and productivity
   libreoffice
+  pandoc
   texmaker
   texliveFull
 
