@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # Keep Codex fresh independently of the system nixpkgs pin.
+    codex-nixpkgs.url = "github:NixOS/nixpkgs/0968519e14f7aa7d3e9b389682bd74d2b51c8ce8";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,16 +25,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ramya-home, wnix-packages, ... }:
+  outputs = { self, nixpkgs, codex-nixpkgs, home-manager, ramya-home, wnix-packages, ... }:
     let
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       overlay = import ./overlay;
 
+      codexOverlay = final: _prev: {
+        codex = codex-nixpkgs.legacyPackages.${final.stdenv.hostPlatform.system}.codex;
+      };
+
+      overlays = overlay ++ [ wnix-packages.overlays.default codexOverlay ];
+
       mkPkgs = system: import nixpkgs {
         inherit system;
-        overlays = overlay ++ [ wnix-packages.overlays.default ];
+        inherit overlays;
         config.allowUnfree = true;
       };
 
@@ -42,7 +52,7 @@
             ./machines/${name}/default.nix
             home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = overlay ++ [ wnix-packages.overlays.default ];
+              nixpkgs.overlays = overlays;
               home-manager = {
                 useUserPackages = true;
                 backupFileExtension = "backup";
