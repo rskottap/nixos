@@ -15,6 +15,7 @@
   gedit
   evince
   eog
+  xdg-utils
 
   # Terminal and console
   gpm

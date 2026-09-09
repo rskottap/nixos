@@ -10,6 +10,7 @@ let
     build
     twine
     pytest
+    pygments # pygmentize, used by LaTeX minted2 for code highlighting
     editdistance
     multiprocess
 
