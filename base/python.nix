@@ -22,6 +22,13 @@ let
     seaborn
     scikit-learn
 
+    # alphanum: image conversion and PDF generation
+    scikit-image
+    cairosvg
+    pypdf
+    pymupdf
+    reportlab
+
     torch
     # GPU-enabled PyTorch
     #(pytorch.override { cudaSupport = true; })
