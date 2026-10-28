@@ -68,6 +68,10 @@ in
       openFirewall = true;
     };
 
+    # Preserve the running D-Bus implementation across nixpkgs updates.
+    # Changing to broker requires a boot rebuild and reboot.
+    services.dbus.implementation = "dbus";
+
     # Enable sound with pipewire.
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
