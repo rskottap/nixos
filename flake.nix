@@ -4,9 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Keep Codex fresh independently of the system nixpkgs pin.
-    codex-nixpkgs.url = "github:NixOS/nixpkgs/0968519e14f7aa7d3e9b389682bd74d2b51c8ce8";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,18 +22,44 @@
     };
   };
 
-  outputs = { self, nixpkgs, codex-nixpkgs, home-manager, ramya-home, wnix-packages, ... }:
+  outputs = { self, nixpkgs, home-manager, ramya-home, wnix-packages, ... }:
     let
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       overlay = import ./overlay;
 
-      codexOverlay = final: _prev: {
-        codex = codex-nixpkgs.legacyPackages.${final.stdenv.hostPlatform.system}.codex;
+      pythonCompatibilityOverlay = final: prev: {
+        # Keep system/build tooling on the cached upstream interpreter. The
+        # external overlay's experimental python314 disables dependency tests
+        # and would otherwise force thousands of unrelated packages to rebuild.
+        python3 = (import nixpkgs {
+          localSystem = prev.stdenv.buildPlatform;
+          crossSystem = prev.stdenv.hostPlatform;
+        }).python3;
+        python3Packages = final.python3.pkgs;
+        pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+          (_pyfinal: pyprev: {
+            # Match pyproject.toml in the overlay's pinned assure source;
+            # newer nixpkgs rejects the overlay's placeholder "latest".
+            assure = pyprev.assure.overridePythonAttrs {
+              version = "0.0.6";
+            };
+          })
+        ];
+        python314 = prev.python314.override (old: {
+          packageOverrides = nixpkgs.lib.composeExtensions
+            (old.packageOverrides or (_: _: {}))
+            (pyfinal: _pyprev: {
+              # The external overlay's overridePythonAttrs drops .override,
+              # which fetchCargoVendor needs to disable mypyc for bootstrapping.
+              charset-normalizer = pyfinal.callPackage
+                "${nixpkgs}/pkgs/development/python-modules/charset-normalizer" {};
+            });
+        });
       };
 
-      overlays = overlay ++ [ wnix-packages.overlays.default codexOverlay ];
+      overlays = overlay ++ [ wnix-packages.overlays.default pythonCompatibilityOverlay ];
 
       mkPkgs = system: import nixpkgs {
         inherit system;
