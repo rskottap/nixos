@@ -1,6 +1,7 @@
 { pkgs }: with pkgs; [
   # System utilities
   acpi
+  bubblewrap
   hwinfo
   usbutils
   inotify-tools
