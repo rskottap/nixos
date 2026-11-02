@@ -34,6 +34,7 @@ let
     #(pytorch.override { cudaSupport = true; })
 
     pip
+    uv
 
     # notebooks
     ipykernel
