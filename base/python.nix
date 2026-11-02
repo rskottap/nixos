@@ -50,6 +50,7 @@ let
         embd
         python-bin
         #python-cowsay
+        dvc
         dvc-s3
         webfs
         #imfind
