@@ -1,4 +1,5 @@
 { pkgs }: with pkgs; [
+  chatgpt
   obsidian
   google-chrome
   karere # wasistlos was archived and removed from nixpkgs
